@@ -1,34 +1,102 @@
-# VSS-Core [![GitHub stars](https://img.shields.io/github/stars/VSS-SDK/VSS-Core.svg?style=social&label=Stars)](https://github.com/VSS-SDK/VSS-Core)
+# VSS-SampleCpp [![GitHub stars](https://img.shields.io/github/stars/VSS-SDK/VSS-SampleCpp.svg?style=social&label=Stars)](https://github.com/VSS-SDK/VSS-SampleCpp)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)][gpl3]
-[![Build Status](https://api.travis-ci.com/VSS-SDK/VSS-Core.svg?branch=master)][travis]
+[![Build Status](https://api.travis-ci.com/VSS-SDK/VSS-SampleCpp.svg?branch=master)][travis]
 
-O VSS-Core é uma biblioteca com o núcleo compartilhado entre todos projetos do SDK. Ele é responsável por prover
-estruturas de dados comuns ao problema de futebol de robôs, constantes, enums, métodos úteis e as interfaces de
-comunicações via rede.
+```cpp
+#include <Communications/StateReceiver.h>
+#include <Communications/CommandSender.h>
+#include <Communications/DebugSender.h>
+#include "cstdlib"
 
-* [Domínio](domain.md)
-* [Interfaces de comunicação](enums.md)
-* [Interprete de configuração](basicmodels.md)
-* [Arquivos protos](protofiles.md)
+using namespace vss;
 
-O SDK possui um cuidado especial quanto a tempo de execução, pois, o problema de futebol de robôs é muito dinâmico. 
-Para diminur ao máximo o overhead causado pela comunicação entre os projetos, são utilizados duas bibliotecas: 
-[Google Protocol Buffers (Protobuf)](https://developers.google.com/protocol-buffers/) e [ZeroMQ](http://zeromq.org/). 
+IStateReceiver *stateReceiver;
+ICommandSender *commandSender;
+IDebugSender *debugSender;
 
-A biblioteca protobuf é responsável pela serialização dos dados que trafegam entre os projetos. Diferente de outros 
-métodos de serialização, como: XML ou JSON. Protobuf gera um código seguro de serialização/deserialização específico 
-para cada linguagem, dessa forma facilitando trabalho. Além disso, a biblioteca é conhecida por possuir menores tempo 
-de serialização e de deserialização, o que corroborou na sua utilização. 
+State state;
 
-A biblioteca ZeroMQ é responsável pela comunicação entre os projetos, sendo essa uma fila de mensagens. Cada pacote 
-que trafega no projeto possui sua própria fila que pode possuir modelos unicast, multicast ou broadcast. 
-Também podem existir comunicações TCP ou UDP. 
 
-Um exemplo de comunicação realizada pelo SDK são os pacotes de estados enviados pelo VSS-Vision e VSS-Simulator. 
-Tais pacotes são enviados em broadcast e utilizam o protocolo UDP. O envio desses pacotes em broadcast possibilita que 
-estratégias, o VSS-Viewer e outras eventuais aplicações consigam interpretar as mensages, além de não travar a execução 
-do Sistema de Visão Computacional e do Simulador. 
+void send_commands();
+void send_debug();
+
+int main(int argc, char** argv){
+    srand(time(NULL));
+
+    stateReceiver = new StateReceiver();
+    commandSender = new CommandSender();
+    debugSender = new DebugSender();
+
+    stateReceiver->createSocket();
+    commandSender->createSocket(TeamType::Yellow);
+    debugSender->createSocket(TeamType::Yellow);
+
+    while(true){
+        state = stateReceiver->receiveState(FieldTransformationType::None);
+        send_commands();
+        send_debug();
+    }
+
+    return 0;
+}
+
+void send_commands(){
+    Command command;
+
+    for(int i = 0 ; i < 3 ; i++){
+        WheelsCommand wheelsCommand;
+
+        wheelsCommand.leftVel = 10;
+        wheelsCommand.rightVel = -10;
+
+        command.commands.push_back(wheelsCommand);
+    }
+
+    commandSender->sendCommand(command);
+}
+
+
+void send_debug(){
+    vss::Debug debug;
+
+    for(unsigned int i = 0 ; i < 3 ; i++){
+        vss::Point point;
+
+        point.x = state.teamYellow[i].x - 10 + rand()%20;
+        point.y = state.teamYellow[i].y - 10 + rand()%20;
+
+        debug.stepPoints.push_back(point);
+    }
+
+    for(unsigned int i = 0 ; i < 3 ; i++){
+        vss::Pose pose;
+
+        pose.x = state.teamYellow[i].x - 10 + rand()%20;
+        pose.y = state.teamYellow[i].y - 10 + rand()%20;
+        pose.angle = state.teamYellow[i].y - 10 + rand()%20;
+
+        debug.finalPoses.push_back(pose);
+    }
+
+    for(unsigned int i = 0 ; i < 3 ; i++){
+        vss::Path path;
+        vss::Point point_1;
+        vss::Point point_2;
+
+        point_1.x = state.teamYellow[i].x;
+        point_1.y = state.teamYellow[i].y;
+
+        point_2.x = state.ball.x - 10 + rand()%20;
+        point_2.y = state.ball.y - 10 + rand()%20;
+
+        path.points.push_back(point_1);
+        path.points.push_back(point_2);
+    }
+
+    debugSender->sendDebug(debug);
+}
+```
 
 [gpl3]: http://www.gnu.org/licenses/gpl-3.0/
-[travis]: https://travis-ci.com/VSS-SDK/VSS-Core
+[travis]: https://travis-ci.com/VSS-SDK/VSS-SampleCpp

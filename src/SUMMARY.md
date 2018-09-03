@@ -2,7 +2,7 @@
     
 - [VSS-SDK](sdk.md)
     
-- [VSS-SampleCpp](sample.md)
+- [VSS-CoreCpp](core.md)
     - [Domínio](domain.md)
         - [Constantes](constants.md)
         - [Enums](enums.md)
@@ -15,3 +15,5 @@
         - [Obtendo estados](recvstate.md)
         
     - [Interprete de configuração](configinterpreter.md)
+    
+- [VSS-SampleCpp](sample.md)
