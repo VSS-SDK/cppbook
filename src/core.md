@@ -7,7 +7,7 @@ O VSS-CoreCpp é exatamente o VSS-Core utilizado pelo VSS-SDK nos demais projeto
 Inclusive é utilizado no VSS-SampleCpp. Também está em desenvolvimento um VSS-CoreRust e um VSS-CorePy.
 
 * [Domínio](domain.md)
-* [Interfaces de comunicação](enums.md)
+* [Interfaces de comunicação](communicationinterface.md)
 * [Interprete de configuração](basicmodels.md)
 
 Aqui são listados as constantes, modelos, interfaces de comunicação, helpers e builders que podem
