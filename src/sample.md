@@ -3,6 +3,9 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)][gpl3]
 [![Build Status](https://api.travis-ci.com/VSS-SDK/VSS-SampleCpp.svg?branch=master)][travis]
 
+Essa é a documentação do VSS-SampleCpp, que utiliza a biblioteca VSS-CoreCpp.
+Para voltar para a documentação do VSS-SDK, [clique aqui](https://vss-sdk.github.io/book/general.html).
+
 ```cpp
 #include <Communications/StateReceiver.h>
 #include <Communications/CommandSender.h>

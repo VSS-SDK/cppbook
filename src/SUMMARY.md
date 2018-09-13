@@ -1,6 +1,7 @@
 # Summary
     
-- [VSS-SDK](sdk.md)
+- [VSS-SampleCpp](sample.md)
+    - [Utilização](use.md)
     
 - [VSS-CoreCpp](core.md)
     - [Domínio](domain.md)
@@ -15,5 +16,3 @@
         - [Obtendo estados](recvstate.md)
         
     - [Interprete de configuração](configinterpreter.md)
-    
-- [VSS-SampleCpp](sample.md)
