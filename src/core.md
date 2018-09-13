@@ -8,7 +8,7 @@ Inclusive é utilizado no VSS-SampleCpp. Também está em desenvolvimento um VSS
 
 * [Domínio](domain.md)
 * [Interfaces de comunicação](communicationinterface.md)
-* [Interprete de configuração](basicmodels.md)
+* [Interprete de configuração](configinterpreter.md)
 
 Aqui são listados as constantes, modelos, interfaces de comunicação, helpers e builders que podem
 auxiliar na construção de estratégias.
