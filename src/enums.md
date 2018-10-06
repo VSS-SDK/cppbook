@@ -1,6 +1,5 @@
 # Enums
 
-## C++
 Domain/DurationType.h
 ```cpp
 namespace vss {
@@ -89,26 +88,5 @@ namespace vss {
 
     std::string toDescription(TeamType);
     TeamType toTeamType(std::string);
-}
-```
-
-
-
-## Rust
-domain::team_type::TeamType
-```rust
-#[derive(Clone, Debug)]
-pub enum TeamType {
-    Yellow,
-    Blue
-}
-```
-
-use domain::field_transformation_type::FieldTransformationType
-```rust
-#[derive(Clone, Debug)]
-pub enum FieldTransformationType {
-    None,
-    Flip180Degrees
 }
 ```
