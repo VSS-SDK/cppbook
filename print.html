@@ -1,0 +1,837 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>VSS-SampleCpp</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">var path_to_root = "";</script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li><a href="sample.html"><strong aria-hidden="true">1.</strong> VSS-SampleCpp</a></li><li><ol class="section"><li><a href="use.html"><strong aria-hidden="true">1.1.</strong> Utilização</a></li></ol></li><li><a href="core.html"><strong aria-hidden="true">2.</strong> VSS-CoreCpp</a></li><li><ol class="section"><li><a href="domain.html"><strong aria-hidden="true">2.1.</strong> Domínio</a></li><li><ol class="section"><li><a href="constants.html"><strong aria-hidden="true">2.1.1.</strong> Constantes</a></li><li><a href="enums.html"><strong aria-hidden="true">2.1.2.</strong> Enums</a></li><li><a href="basicmodels.html"><strong aria-hidden="true">2.1.3.</strong> Modelos básicos</a></li><li><a href="configmodels.html"><strong aria-hidden="true">2.1.4.</strong> Modelos de configuração</a></li><li><a href="communicationmodels.html"><strong aria-hidden="true">2.1.5.</strong> Modelos de comunicação</a></li></ol></li><li><a href="communicationinterface.html"><strong aria-hidden="true">2.2.</strong> Interfaces de comunicação</a></li><li><ol class="section"><li><a href="sendcommand.html"><strong aria-hidden="true">2.2.1.</strong> Enviando comandos</a></li><li><a href="recvstate.html"><strong aria-hidden="true">2.2.2.</strong> Obtendo estados</a></li></ol></li><li><a href="configinterpreter.html"><strong aria-hidden="true">2.3.</strong> Interprete de configuração</a></li></ol></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">VSS-SampleCpp</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#vss-samplecpp-a-hrefhttpsgithubcomvss-sdkvss-samplecppimg-srchttpsimgshieldsiogithubstarsvss-sdkvss-samplecppsvgstylesociallabelstars-altgithub-stars-a" id="vss-samplecpp-a-hrefhttpsgithubcomvss-sdkvss-samplecppimg-srchttpsimgshieldsiogithubstarsvss-sdkvss-samplecppsvgstylesociallabelstars-altgithub-stars-a"><h1>VSS-SampleCpp <a href="https://github.com/VSS-SDK/VSS-SampleCpp"><img src="https://img.shields.io/github/stars/VSS-SDK/VSS-SampleCpp.svg?style=social&amp;label=Stars" alt="GitHub stars" /></a></h1></a>
+<p><a href="http://www.gnu.org/licenses/gpl-3.0/"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL v3" /></a>
+<a href="https://travis-ci.com/VSS-SDK/VSS-SampleCpp"><img src="https://api.travis-ci.com/VSS-SDK/VSS-SampleCpp.svg?branch=master" alt="Build Status" /></a></p>
+<p>Essa é a documentação do VSS-SampleCpp, que utiliza a biblioteca VSS-CoreCpp.
+Para voltar para a documentação do VSS-SDK, <a href="https://vss-sdk.github.io/book/general.html">clique aqui</a>.</p>
+<pre><code class="language-cpp">#include &lt;Communications/StateReceiver.h&gt;
+#include &lt;Communications/CommandSender.h&gt;
+#include &lt;Communications/DebugSender.h&gt;
+#include &quot;cstdlib&quot;
+
+using namespace vss;
+
+IStateReceiver *stateReceiver;
+ICommandSender *commandSender;
+IDebugSender *debugSender;
+
+State state;
+
+
+void send_commands();
+void send_debug();
+
+int main(int argc, char** argv){
+    srand(time(NULL));
+
+    stateReceiver = new StateReceiver();
+    commandSender = new CommandSender();
+    debugSender = new DebugSender();
+
+    stateReceiver-&gt;createSocket();
+    commandSender-&gt;createSocket(TeamType::Yellow);
+    debugSender-&gt;createSocket(TeamType::Yellow);
+
+    while(true){
+        state = stateReceiver-&gt;receiveState(FieldTransformationType::None);
+        send_commands();
+        send_debug();
+    }
+
+    return 0;
+}
+
+void send_commands(){
+    Command command;
+
+    for(int i = 0 ; i &lt; 3 ; i++){
+        WheelsCommand wheelsCommand;
+
+        wheelsCommand.leftVel = 10;
+        wheelsCommand.rightVel = -10;
+
+        command.commands.push_back(wheelsCommand);
+    }
+
+    commandSender-&gt;sendCommand(command);
+}
+
+
+void send_debug(){
+    vss::Debug debug;
+
+    for(unsigned int i = 0 ; i &lt; 3 ; i++){
+        vss::Point point;
+
+        point.x = state.teamYellow[i].x - 10 + rand()%20;
+        point.y = state.teamYellow[i].y - 10 + rand()%20;
+
+        debug.stepPoints.push_back(point);
+    }
+
+    for(unsigned int i = 0 ; i &lt; 3 ; i++){
+        vss::Pose pose;
+
+        pose.x = state.teamYellow[i].x - 10 + rand()%20;
+        pose.y = state.teamYellow[i].y - 10 + rand()%20;
+        pose.angle = state.teamYellow[i].y - 10 + rand()%20;
+
+        debug.finalPoses.push_back(pose);
+    }
+
+    for(unsigned int i = 0 ; i &lt; 3 ; i++){
+        vss::Path path;
+        vss::Point point_1;
+        vss::Point point_2;
+
+        point_1.x = state.teamYellow[i].x;
+        point_1.y = state.teamYellow[i].y;
+
+        point_2.x = state.ball.x - 10 + rand()%20;
+        point_2.y = state.ball.y - 10 + rand()%20;
+
+        path.points.push_back(point_1);
+        path.points.push_back(point_2);
+    }
+
+    debugSender-&gt;sendDebug(debug);
+}
+</code></pre>
+<a class="header" href="#utilização" id="utilização"><h1>Utilização</h1></a>
+<p>Assumindo que você já tenha instalado o VSS-SDK, principalmente o VSS-CoreCpp. Para utilizar o exemplo
+basta executar os seguintes comandos.</p>
+<p><strong>Obs: O VSS-CoreCpp é exatamente o VSS-Core utilizado no VSS-SDK</strong></p>
+<a class="header" href="#vss-samplecpp" id="vss-samplecpp"><h3>VSS-SampleCpp</h3></a>
+<pre><code>git clone https://github.com/VSS-SDK/VSS-SampleCpp
+cd VSS-SampleCpp
+sudo ./configure.sh
+cd build
+./vss-sample
+</code></pre>
+<a class="header" href="#vss-corecpp-a-hrefhttpsgithubcomvss-sdkvss-coreimg-srchttpsimgshieldsiogithubstarsvss-sdkvss-coresvgstylesociallabelstars-altgithub-stars-a" id="vss-corecpp-a-hrefhttpsgithubcomvss-sdkvss-coreimg-srchttpsimgshieldsiogithubstarsvss-sdkvss-coresvgstylesociallabelstars-altgithub-stars-a"><h1>VSS-CoreCpp <a href="https://github.com/VSS-SDK/VSS-Core"><img src="https://img.shields.io/github/stars/VSS-SDK/VSS-Core.svg?style=social&amp;label=Stars" alt="GitHub stars" /></a></h1></a>
+<p><a href="http://www.gnu.org/licenses/gpl-3.0/"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL v3" /></a>
+<a href="https://travis-ci.com/VSS-SDK/VSS-Core"><img src="https://api.travis-ci.com/VSS-SDK/VSS-Core.svg?branch=master" alt="Build Status" /></a></p>
+<p>O VSS-CoreCpp é exatamente o VSS-Core utilizado pelo VSS-SDK nos demais projetos.
+Inclusive é utilizado no VSS-SampleCpp. Também está em desenvolvimento um VSS-CoreRust e um VSS-CorePy.</p>
+<ul>
+<li><a href="domain.html">Domínio</a></li>
+<li><a href="communicationinterface.html">Interfaces de comunicação</a></li>
+<li><a href="configinterpreter.html">Interprete de configuração</a></li>
+</ul>
+<p>Aqui são listados as constantes, modelos, interfaces de comunicação, helpers e builders que podem
+auxiliar na construção de estratégias.</p>
+<a class="header" href="#domínio" id="domínio"><h1>Domínio</h1></a>
+<p>Dentro do domínio de futebol de robôs existem algumas constantes e estruturas de dados que são utilizadas
+em todos os projetos do SDK e podem ser utilizados em estratégias também.</p>
+<ul>
+<li><a href="constants.html">Constantes</a></li>
+<li><a href="enums.html">Enums</a></li>
+<li><a href="basicmodels.html">Modelos básicos</a></li>
+<li><a href="configmodels.html">Modelos de configuração</a></li>
+<li><a href="communicationmodels.html">Modelos de comunicação</a></li>
+</ul>
+<a class="header" href="#constantes" id="constantes"><h1>Constantes</h1></a>
+<p>Constants.h</p>
+<pre><code class="language-cpp">namespace vss {
+    // Space Constraints
+    const int MIN_COORDINATE_X = 0;
+    const int MAX_COORDINATE_X = 170;
+    const int MIN_COORDINATE_Y = 0;
+    const int MAX_COORDINATE_Y = 130;
+    const int MIN_ANGLE_VALUE = 0;
+    const int MAX_ANGLE_VALUE = 360;
+
+    // Randomization
+    const int MAX_RANDOM_VELOCITY = 5;
+    const int MAX_RANDOM_PATH_SIZE = 10;
+    const int MAX_RANDOM_TEAM_SIZE = 11;
+    const int MAX_RANDOM_WHEEL_COMMAND = 10;
+    const int MAX_RANDOM_IP_VALUE = 255;
+    const int MAX_RANDOM_PORT_VALUE = 20000;
+
+    // Communication
+    const int DEFAULT_STATE_PORT = 5555;
+    const int DEFAULT_CMD_YELLOW_PORT = 5556;
+    const int DEFAULT_CMD_BLUE_PORT = 5557;
+    const int DEFAULT_DEBUG_YELLOW_PORT = 5558;
+    const int DEFAULT_DEBUG_BLUE_PORT = 5559;
+    const int DEFAULT_CTRL_PORT = 5560;
+    const std::string DEFAULT_STATE_SEND_ADDR = &quot;tcp://*&quot;;
+    const std::string DEFAULT_STATE_RECV_ADDR = &quot;tcp://localhost&quot;;
+    const std::string DEFAULT_CMD_SEND_ADDR = &quot;tcp://localhost&quot;;
+    const std::string DEFAULT_CMD_RECV_ADDR = &quot;tcp://*&quot;;
+    const std::string DEFAULT_DEBUG_SEND_ADDR = &quot;tcp://localhost&quot;;
+    const std::string DEFAULT_DEBUG_RECV_ADDR = &quot;tcp://*&quot;;
+    const std::string DEFAULT_CTRL_SEND_ADDR = &quot;tcp://*&quot;;
+    const std::string DEFAULT_CTRL_RECV_ADDR = &quot;tcp://localhost&quot;;
+
+    // Enums
+    const TeamType DEFAULT_TEAM_TYPE = TeamType::Yellow;
+    const SideAttackType DEFAULT_SIDE_ATTACK_TYPE = SideAttackType::Left;
+    const TimeExecutionType DEFAULT_TIME_EXECUTION_TYPE = TimeExecutionType::Normal;
+    const EnvironmentType DEFAULT_ENVIRONMENT_TYPE = EnvironmentType::Simulation;
+    const DurationType  DEFAULT_DURATION_TYPE = DurationType::TenMinutes;
+    const MatchFinishType DEFAULT_MATCH_FINISH_TYPE = MatchFinishType::TenGoalsDifference;
+}
+</code></pre>
+<a class="header" href="#enums" id="enums"><h1>Enums</h1></a>
+<p>Domain/DurationType.h</p>
+<pre><code class="language-cpp">namespace vss {
+    enum DurationType{
+        TenMinutes = 0,
+        UnlimitedMinutes = 1
+    };
+
+    std::string toDescription(DurationType);
+    DurationType toDurationType(std::string);
+}
+</code></pre>
+<p>Domain/EnvironmentType.h</p>
+<pre><code class="language-cpp">namespace vss {
+    enum EnvironmentType{
+        Simulation = 0,
+        Real = 1
+    };
+
+    std::string toDescription(EnvironmentType);
+    EnvironmentType toEnvironmentType(std::string);
+}
+</code></pre>
+<p>Domain/FieldTransformationType.h</p>
+<pre><code class="language-cpp">namespace vss {
+    enum FieldTransformationType{
+        None = 0,
+        Flip180Degrees = 1
+    };
+
+    std::string toDescription(FieldTransformationType);
+    FieldTransformationType toFieldTransformationType(std::string);
+}
+</code></pre>
+<p>Domain/MatchFinishType.h</p>
+<pre><code class="language-cpp">namespace vss {
+    enum MatchFinishType{
+        TenGoalsDifference = 0,
+        TimeUp = 1
+    };
+
+    std::string toDescription(MatchFinishType);
+    MatchFinishType toMatchFinishType(std::string);
+}
+</code></pre>
+<p>Domain/SideAttackType.h</p>
+<pre><code class="language-cpp">namespace vss {
+    enum SideAttackType{
+        Left = 0,
+        Right = 1
+    };
+
+    std::string toDescription(SideAttackType);
+    SideAttackType toSideAttackType(std::string);
+}
+</code></pre>
+<p>Domain/TimeExecutionType.h</p>
+<pre><code class="language-cpp">namespace vss {
+    enum TimeExecutionType {
+        Normal = 0,
+        Fast = 1
+    };
+
+    std::string toDescription(TimeExecutionType);
+    TimeExecutionType toTimeExecutionType(std::string);
+}
+</code></pre>
+<p>Domain/TeamType.h</p>
+<pre><code class="language-cpp">namespace vss {
+    enum TeamType{
+        Yellow = 0,
+        Blue = 1
+    };
+
+    std::string toDescription(TeamType);
+    TeamType toTeamType(std::string);
+}
+</code></pre>
+<a class="header" href="#modelos-básicos" id="modelos-básicos"><h1>Modelos básicos</h1></a>
+<p>Domain/Point.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class Point {
+    public:
+        Point();
+        Point(float x, float y);
+
+        friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Point&amp; point);
+
+        float x;
+        float y;
+    };
+}
+</code></pre>
+<p>Domain/Pose.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class Pose : public Point {
+    public:
+        Pose();
+        Pose(float x, float y, float angle);
+
+        friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Pose&amp; pose);
+
+        float angle;
+    };
+}
+</code></pre>
+<p>Domain/Ball.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class Ball : public Point {
+    public:
+        Ball();
+        Ball(float x, float y, float speedX, float speedY);
+
+        friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Ball&amp; ball);
+
+        float speedX;
+        float speedY;
+    };
+}
+</code></pre>
+<p>Domain/Robot.h</p>
+<pre><code class="language-cpp">amespace vss {
+    class Robot : public Pose {
+    public:
+        Robot();
+        Robot(float x, float y, float angle, float speedX, float speedY, float speedAngle);
+
+        friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Robot&amp; robot);
+
+        float speedX;
+        float speedY;
+        float speedAngle;
+    };
+}
+</code></pre>
+<p>Domain/Path.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class Path {
+    public:
+        Path();
+        Path(std::vector&lt;Point&gt; points);
+
+        friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Path&amp; path);
+
+        std::vector&lt;Point&gt; points;
+    };
+}
+</code></pre>
+<p>WheelsCommand.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class WheelsCommand {
+    public:
+        WheelsCommand();
+        WheelsCommand(int id, float leftVel, float rightVel);
+
+        friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const WheelsCommand&amp; wheelsCommand);
+
+        int id;
+        float leftVel;
+        float rightVel;
+    };
+}
+</code></pre>
+<a class="header" href="#modelos-de-configuração" id="modelos-de-configuração"><h1>Modelos de configuração</h1></a>
+<p>Domain/ExecutionConfig.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class ExecutionConfig {
+    public:
+        ExecutionConfig();
+
+        friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const ExecutionConfig&amp; executionConfig);
+
+        // Communications
+        Address stateRecvAddr;
+        Address stateSendAddr;
+
+        Address cmdYellowRecvAddr;
+        Address cmdYellowSendAddr;
+        Address debugYellowRecvAddr;
+        Address debugYellowSendAddr;
+
+        Address cmdBlueRecvAddr;
+        Address cmdBlueSendAddr;
+        Address debugBlueRecvAddr;
+        Address debugBlueSendAddr;
+
+        Address ctrlRecvAddr;
+        Address ctrlSendAddr;
+
+        // Enums
+        TeamType teamType;
+        SideAttackType sideAttackType;
+        TimeExecutionType timeExecutionType;
+        EnvironmentType environmentType;
+        DurationType durationType;
+        MatchFinishType matchFinishType;
+
+        // Others
+        std::string teamInitialPositionPath;
+
+        bool isValidConfiguration;
+    };
+}
+</code></pre>
+<a class="header" href="#modelos-de-comunicação" id="modelos-de-comunicação"><h1>Modelos de comunicação</h1></a>
+<p>Domain/Address.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class Address {
+    public:
+        Address();
+        Address(std::string ip, int port);
+
+        friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Address&amp; address);
+
+        void setIp(std::string ip);
+        void setPort(int port);
+
+        std::string getIp();
+        int getPort();
+
+        std::string getFullAddress();
+
+        std::string ip;
+        int port;
+    };
+}
+</code></pre>
+<p>Domain/State.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class State {
+    public:
+        State();
+        State(Ball ball, std::vector&lt;Robot&gt; teamBlue, std::vector&lt;Robot&gt; teamYellow);
+
+        friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const State&amp; state);
+
+        Ball ball;
+        std::vector&lt;Robot&gt; teamBlue;
+        std::vector&lt;Robot&gt; teamYellow;
+    };
+}
+</code></pre>
+<p>Domain/Command.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class Command {
+    public:
+        Command();
+        Command(int id, std::vector&lt;WheelsCommand&gt; commands);
+
+        friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Command&amp; command);
+
+        int id;
+        std::vector&lt;WheelsCommand&gt; commands;
+    };
+}
+</code></pre>
+<p>Domain/Debug.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class Debug {
+    public:
+        Debug();
+        Debug(std::vector&lt;Point&gt; stepPoints, std::vector&lt;Pose&gt; finalPoses, std::vector&lt;Path&gt; paths);
+
+        friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Debug&amp; debug);
+
+        std::vector&lt;Point&gt; stepPoints;
+        std::vector&lt;Pose&gt; finalPoses;
+        std::vector&lt;Path&gt; paths;
+    };
+}
+</code></pre>
+<p>Domain/Control.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class Control {
+    public:
+        Control();
+        Control(bool paused, Ball ball, std::vector&lt;Robot&gt; teamYellow, std::vector&lt;Robot&gt; teamBlue);
+
+        friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, const Control&amp; control);
+
+        bool paused;
+        Ball ball;
+        std::vector&lt;Robot&gt; teamYellow;
+        std::vector&lt;Robot&gt; teamBlue;
+    };
+}
+</code></pre>
+<a class="header" href="#interfaces-de-comunicação" id="interfaces-de-comunicação"><h1>Interfaces de comunicação</h1></a>
+<p>Interfaces/IStateReceiver.h, Communications/StateReceiver.h</p>
+<pre><code class="language-cpp">namespace vss{
+    class StateReceiver : public IStateReceiver {
+    public:
+        StateReceiver();
+
+        void createSocket(Address) override;
+        void createSocket() override;
+        State receiveState(FieldTransformationType) override;
+    };
+}
+</code></pre>
+<p>Interfaces/IStateSender.h, Communications/StateSender.h</p>
+<pre><code class="language-cpp">namespace vss{
+    class StateSender : public IStateSender  {
+    public:
+        StateSender();
+
+        void createSocket(Address) override;
+        void createSocket() override;
+        void sendState(State) override;
+    };
+}
+</code></pre>
+<p>Interfaces/ICommandSender.h, Communications/CommandSender.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class CommandSender : public ICommandSender {
+    public:
+        CommandSender();
+
+        void createSocket(Address) override;
+        void createSocket(TeamType) override;
+        void sendCommand(Command) override;
+    };
+}
+</code></pre>
+<p>Interfaces/IDebugReceiver.h, Communications/DebugReceiver.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class DebugReceiver : public IDebugReceiver {
+    public:
+        DebugReceiver();
+
+        void createSocket(Address) override;
+        void createSocket(TeamType) override;
+        Debug receiveDebug() override;
+    };
+}
+</code></pre>
+<p>Interfaces/IDebugSender.h, Communications/DebugSender.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class DebugSender : public IDebugSender {
+    public:
+        DebugSender();
+
+        void createSocket(Address) override;
+        void createSocket(TeamType) override;
+        void sendDebug(Debug) override;
+    };
+}
+</code></pre>
+<p>Interfaces/IControlReceiver.h, Communications/ControlReceiver.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class ControlReceiver : public IControlReceiver {
+    public:
+        ControlReceiver();
+
+        void createSocket(Address) override;
+        void createSocket() override;
+        Control receiveControl() override;
+    };
+}
+</code></pre>
+<p>Interfaces/IControlSender.h, Communications/ControlSender.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class ControlSender : public IControlSender {
+    public:
+        ControlSender();
+
+        void createSocket(Address) override;
+        void createSocket() override;
+        void sendControl(Control) override;
+    };
+}
+</code></pre>
+<a class="header" href="#enviando-comandos" id="enviando-comandos"><h1>Enviando comandos</h1></a>
+<pre><code class="language-cpp">#include &quot;Interfaces/ICommandSender.h&quot;
+#include &quot;Communications/CommandSender.h&quot;
+#include &quot;Domain/Command.h&quot;
+
+using namespace vss;
+
+int main(int argc, char** argv){
+    ICommandSender commandSender = new CommandSender();
+    commandSender-&gt;createSocket(TeamType::Yellow);
+
+    while(true){
+        Command command;
+        commandSender-&gt;sendCommand(command);
+    }
+
+    return 0;
+}
+</code></pre>
+<a class="header" href="#obtendo-estados" id="obtendo-estados"><h1>Obtendo estados</h1></a>
+<pre><code class="language-cpp">#include &quot;Interfaces/IStateReceiver.h&quot;
+#include &quot;Communications/StateReceiver.h&quot;
+#include &quot;Domain/State.h&quot;
+
+using namespace vss;
+
+int main(int argc, char** argv){
+    IStateReceiver *stateReceiver = new StateReceiver();
+    stateReceiver-&gt;createSocket();
+
+    while(true){
+        State state = stateReceiver-&gt;receiveState(FieldTransformationType::None);
+    }
+
+    return 0;
+}
+</code></pre>
+<a class="header" href="#interprete-de-configuração" id="interprete-de-configuração"><h1>Interprete de configuração</h1></a>
+<p>Builders/StdinInterpreterBuilder.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class StdinInterpreterBuilder : public IStdinInterpreterBuilder {
+    public:
+        StdinInterpreterBuilder();
+
+        IStdinInterpreter* buildInterpreter() override;
+
+        IStdinInterpreterBuilder* onStateRecvAddr() override;
+        IStdinInterpreterBuilder* onStateSendAddr() override;
+
+        IStdinInterpreterBuilder* onYellowCmdRecvAddr() override;
+        IStdinInterpreterBuilder* onYellowCmdSendAddr() override;
+        IStdinInterpreterBuilder* onYellowDebugRecvAddr() override;
+        IStdinInterpreterBuilder* onYellowDebugSendAddr() override;
+
+        IStdinInterpreterBuilder* onBlueCmdRecvAddr() override;
+        IStdinInterpreterBuilder* onBlueCmdSendAddr() override;
+        IStdinInterpreterBuilder* onBlueDebugRecvAddr() override;
+        IStdinInterpreterBuilder* onBlueDebugSendAddr() override;
+
+        IStdinInterpreterBuilder* onCtrlRecvAddr() override;
+        IStdinInterpreterBuilder* onCtrlSendAddr() override;
+
+        IStdinInterpreterBuilder* onStatePort() override;
+        IStdinInterpreterBuilder* onYellowCmdPort() override;
+        IStdinInterpreterBuilder* onYellowDebugPort() override;
+        IStdinInterpreterBuilder* onBlueCmdPort() override;
+        IStdinInterpreterBuilder* onBlueDebugPort() override;
+        IStdinInterpreterBuilder* onCtrlPort() override;
+
+        IStdinInterpreterBuilder* onTeamType() override;
+        IStdinInterpreterBuilder* onSideAttackType() override;
+        IStdinInterpreterBuilder* onTimeExecutionType() override;
+        IStdinInterpreterBuilder* onEnvironmentType() override;
+        IStdinInterpreterBuilder* onDurationType() override;
+        IStdinInterpreterBuilder* onMatchFinishType() override;
+
+        IStdinInterpreterBuilder* onTeamInitialPositionPath() override;
+
+    protected:
+        IStdinInterpreter *stdinInterpreter;
+    };
+}
+</code></pre>
+<p>Interpreters/StdinInterpreter.h</p>
+<pre><code class="language-cpp">namespace vss {
+    class StdinInterpreter : public IStdinInterpreter {
+    public:
+        StdinInterpreter();
+
+        ExecutionConfig extractExecutionConfig(int argc, char **argv) override;
+
+    protected:
+        ExecutionConfig stdinConfiguration;
+
+        boost::program_options::options_description buildOptions();
+        void buildConfiguration(boost::program_options::variables_map);
+    };
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
