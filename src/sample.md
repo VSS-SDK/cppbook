@@ -6,6 +6,10 @@
 Essa é a documentação do VSS-SampleCpp, que utiliza a biblioteca VSS-CoreCpp.
 Para voltar para a documentação do VSS-SDK, [clique aqui](https://vss-sdk.github.io/book/general.html).
 
+O VSS-SampleCpp é um código de uma estratégia de exemplo para ser utilizada com o pacote VSS-SDK. A o código em c++ em questão está disponível abaixo:
+<details>
+    <summary> Código (clique para expandir) </summary>
+    
 ```cpp
 #include <Communications/StateReceiver.h>
 #include <Communications/CommandSender.h>
@@ -100,6 +104,38 @@ void send_debug(){
     debugSender->sendDebug(debug);
 }
 ```
+</details>
+
+Assumindo que você já tenha instalado o VSS-SDK, principalmente o VSS-CoreCpp. Para utilizar o exemplo
+basta executar os seguintes comandos.
+
+**Obs: O VSS-CoreCpp é exatamente o VSS-Core utilizado no VSS-SDK**
+
+Os comandos para instalar o Sample são similares aos dos outros módulos do SDK.
+
+### VSS-SampleCpp
+```
+git clone https://github.com/VSS-SDK/VSS-SampleCpp
+cd VSS-SampleCpp
+sudo ./configure.sh
+```
+
+Para executar a estratégia, é necessário primeiro rodar o Simulator e o Viewer (em terminais diferentes):
+```
+vss-simulator
+```
+e
+```
+vss-viewer
+```
+Em seguida, a estratégia pode ser executada através da IDE utilizada para abrir o código fonte, ou pelo próprio terminal, para isso deve-se estar na pasta "build".
+```
+cd VSS-SampleCpp
+cd build
+./vss-sample
+```
+
+
 
 [gpl3]: http://www.gnu.org/licenses/gpl-3.0/
 [travis]: https://travis-ci.com/VSS-SDK/VSS-SampleCpp
